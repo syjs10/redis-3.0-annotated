@@ -84,6 +84,7 @@ void zlibc_free(void *ptr) {
 } while(0)
 
 #endif
+
 /**  ~js~
  * 更新全局变量used_memory 已使用的内存大小 增加
  */
@@ -96,6 +97,7 @@ void zlibc_free(void *ptr) {
         used_memory += _n; \
     } \
 } while(0)
+
 /**  ~js~
  * 更新全局变量used_memory 已使用的内存大小 减少
  */
@@ -134,7 +136,7 @@ void *zmalloc(size_t size) {
   * 这里将分配内存的大小记录在了分配好的内存的开头，
   * 并将指针指向真正分配使用的内存地址上，
   * 这样如果需要知道分配的地址有多大只需将指针向前指一个size_t的长度就能知道分配了多大的内存。
-**/
+  */
     *((size_t*)ptr) = size;
     update_zmalloc_stat_alloc(size+PREFIX_SIZE);
     return (char*)ptr+PREFIX_SIZE;
